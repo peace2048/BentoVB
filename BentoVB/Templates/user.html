@@ -1,0 +1,51 @@
+<div class="container">
+    <h2>{{ user.Name }}</h2>
+    <div>Today: {{ todaysOrder.OrderDate | date:'longDate' }}</div>
+    <div class="col-md-6">
+        <div ng-show="todaysOrder.Status != 0">
+            <div ng-switch on="todaysOrder.Status">
+                <h2 ng-switch-when="1">Sorry, Already closed.</h2>
+                <h2 ng-switch-when="2">Sorry, Today is a holiday.</h2>
+            </div>
+            <p ng-show="!todaysOrder.IsOrdered">You do not order a lunch box.</p>
+            <p ng-show="todaysOrder.IsOrdered">You bought a lunch box.</p>
+        </div>
+        <div ng-show="todaysOrder.Status == 0">
+            <div ng-if="todaysOrder.IsOrdered">
+                <h2>Do you cancel the order?</h2>
+                <button class="btn btn-default" ng-click="orderChangeToday()">YES, I do cancel.</button>
+            </div>
+            <div ng-if="!todaysOrder.IsOrdered">
+                <h2>Do you want to order?</h2>
+                <button class="btn btn-default" ng-click="orderChangeToday()">YES</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <ul class="pager">
+            <li>
+                <a ng-click="previewMonth()">Preview</a>
+            </li>
+            {{ startDate | date:'longDate' }} - {{ endDate | date:'MMMM d' }}
+            <li>
+                <a ng-click="nextMonth()">Next</a>
+            </li>
+        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>date</th>
+                    <th>Order</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="order in orders">
+                    <td>{{ order.OrderDate | date:'EEE, MMM d, y' }}</td>
+                    <td>
+                        <input type="checkbox" ng-model="order.IsOrdered" ng-disabled="order.Status != 0" ng-change="orderChange(order)" />
+                    </td>
+                <tr>
+            </tbody>
+        </table>
+    </div>
+</div>

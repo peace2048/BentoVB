@@ -1,0 +1,9 @@
+<div class="jumbotron">
+  <h1>Bento</h1>
+  <p class="lead">Bento ordering system.</p>
+</div>
+<div class="container">
+  <h2>Who are you?</h2>
+  <a class="btn" ng-repeat="user in users" ng-href="#/User/{{ user.Id }}">{{ user.Name }}</a>
+  <a class="btn" ng-click="openDialog()">create new user</a>
+</div>

@@ -1,0 +1,45 @@
+<div class="container">
+    <h2>Holiday</h2>
+    <div>
+        Year:
+        <select ng-model="year" ng-options="y for y in years" ng-change="changeYear()"></select>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Holiday <small>xxx</small></h3>
+                </div>
+                <div class="panel-body">
+                    <table border="0">
+                        <tr ng-repeat="c in holidays">
+                            <td>{{ c.Target | date:'longDate' }}</td>
+                            <td><button class="btn btn-link" ng-click="deleteCalendar(c)">Delete</button></td>
+                        </tr>
+                    </table>
+                    <p>
+                        <input type="date" class="form-control" ng-model="holiday" />
+                        <button class="btn btn-default" ng-click="addHoliday()">Add</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3>Working <small>xxx</small></h3></div>
+                <div class="panel-body">
+                    <table border="0">
+                        <tr ng-repeat="c in working">
+                            <td>{{ c.Target | date:'longDate' }}</td>
+                            <td><button class="btn btn-link" ng-click="deleteCalendar(c)">Delete</button></td>
+                        </tr>
+                    </table>
+                    <p>
+                        <input type="date" class="form-control" ng-model="working" />
+                        <button class="btn btn-default" ng-click="addWorking()">Add</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

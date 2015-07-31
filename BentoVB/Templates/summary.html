@@ -1,0 +1,60 @@
+<div class="container">
+    <h2>Todays order</h2>
+    <p>Total: <span>{{ today.Count }}</span></p>
+    <div ng-hide="today.Flag == 2">
+        <div ng-switch on="today.Flag">
+            <button class="btn btn-default" ng-click="changeStatus()">
+                <span ng-switch-when="0">Close</span>
+                <span ng-switch-when="1">Reopen</span>
+            </button>
+        </div>
+    </div>
+    <div ng-show="today.Flag == 2">
+        <p><strong>Today is holiday.</strong></p>
+    </div>
+
+    <h2>Summary</h2>
+    <ul class="pager">
+        <li><a ng-click="previewMonth()">Preview</a></li>
+        <li>{{ startYear }}/{{ startMonth }}</li>
+        <li><a ng-click="nextMonth()">Next</a></li>
+    </ul>
+    <tabset>
+        <tab heading="Date">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Count</th>
+                        <th>Flag</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="d in daysSummary">
+                        <td>{{ d.Target | date:'longDate' }}</td>
+                        <td>{{ d.Count }}</td>
+                        <td>{{ d.Flag }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tab>
+        <tab heading="User">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in userSummary">
+                        <td>{{ user.User.Id }}</td>
+                        <td>{{ user.User.Name }}</td>
+                        <td>{{ user.Count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </tab>
+    </tabset>
+</div>
